@@ -47,6 +47,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: 'keywords', 
+          content: 'how-to, blog, coding, programming, software development'
+        }
+      ],
       navbar: {
         title: 'Robin Dalmy',
         logo: {

@@ -1,5 +1,7 @@
 ---
 title:  "How to Optimize your websites images for Pagespeed"
+description: Learn ho to optimize website images by using webp formats, media queries, and serving multiple resolutions.
+keywords: [html, css, pagespeed, webp, media-queries, how-to, modernizr]
 slug: how-to-optimize-your-websites-images-for-pagespeed
 categories: Front End
 tags: [web, html, css, pagespeed, images, how-to]

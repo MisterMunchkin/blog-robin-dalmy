@@ -1,5 +1,7 @@
 ---
 title:  "How to work with Expo Bare Workflow"
+description: Learn how to set up, build, and run expo bare workflow for iOS, and Android.
+keywords: [expo, bare, workflow, how-to, iOS, Android]
 slug: how-to-work-with-expo-bare-workflow
 categories: Expo
 authors: mistermunchkin
