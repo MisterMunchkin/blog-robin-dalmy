@@ -2,7 +2,7 @@
 title:  "How to Optimize your websites images for Pagespeed"
 slug: how-to-optimize-your-websites-images-for-pagespeed
 categories: Front End
-tags: [web, html, css, pagespeed, images]
+tags: [web, html, css, pagespeed, images, how-to]
 authors: mistermunchkin
 ---
 
