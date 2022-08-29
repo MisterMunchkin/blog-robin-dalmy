@@ -43,6 +43,13 @@ const config = {
       }),
     ],
   ],
+  scripts: [
+    {
+      src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6667237258230756",
+      async: true,
+      crossorigin: "anonymous"
+    }
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
