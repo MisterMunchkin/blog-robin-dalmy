@@ -5,7 +5,7 @@ keywords: [expo, bare, workflow, how-to, iOS, Android]
 slug: how-to-work-with-expo-bare-workflow
 categories: Expo
 authors: mistermunchkin
-tags: [expo, reactnative, mobile, hot-to]
+tags: [expo, reactnative, mobile, how-to]
 ---
 
 We will go through how to run and debug Androd and iOS on an Expo Bare Workflow locally, with Expo Go, and with EAS Build.
