@@ -1,6 +1,6 @@
 ---
 title:  "How to Optimize your websites images for Pagespeed"
-description: Learn ho to optimize website images by using webp formats, media queries, and serving multiple resolutions.
+description: Learn how to optimize website images by using webp formats, media queries, and serving multiple resolutions.
 keywords: [html, css, pagespeed, webp, media-queries, how-to, modernizr]
 slug: how-to-optimize-your-websites-images-for-pagespeed
 categories: Front End
@@ -20,7 +20,7 @@ Having a responsive web design means it should be optimized for all kinds of dev
 You can use a bunch of different CSS tricks for setting up a flexible layout for your texts, but for images you can use **Media Queries**.
 
 ## Prepare different image sizes and formats
-I see a lot of young developers think that resizing an image using css would be sufficient in saving space. It is not. The full resolution image would still need to get "served" from the server your website is hosted at and then make it to your users browsers. So to actually save space, we would need to prepare different resolution images and formats. I compiled a list of websites I used to compress my image, change image resolution, and change image formats, preferrably you have a **jpeg** version, and a **webp/avif** version.
+A lot of young developers think that resizing an image using css would be sufficient in saving space. It is not. The full resolution image would still need to get "served" from the server your website is hosted at and then make it to your users browsers. So to actually save space, we would need to prepare different resolution images and formats. I compiled a list of websites I used to compress my image, change image resolution, and change image formats, preferrably you have a **jpeg** version, and a **webp/avif** version.
 
 - [tinypng](https://tinypng.com) For compressing different kinds of image formats
 - [convertio](https://convertio.co/image-converter/) For converting images.
@@ -100,7 +100,7 @@ For mobile, I just made use of one picture which had a resolution of 800px by 12
 ## monderizr-webp.js
 [modernizr](https://modernizr.com) have really great tools not just for webp, but for a host of different things for Javascript and CSS. 
 
-You can go to their modernizr download, and build the minified js you need. [modernizr build page](https://modernizr.com/download?webp-setclasses&q=webp) and then add it to your website. Basically modernizr-webp detects your users devices if it can support webp. If it can, then it will give the html body a webp class. If it doesn't, it gets a no-webp class.
+You can go to their modernizr download page, and build the minified js you need: [modernizr download page](https://modernizr.com/download?webp-setclasses&q=webp) and then add it to your website. Basically modernizr-webp detects your users devices if it can support webp. If it can, then it will give the html body a webp class. If it doesn't, it gets a no-webp class.
 
 We can then use this webp/nowebp class to serve different image formats in our media queries for different screen sizes in css.
 
@@ -128,7 +128,7 @@ We can then use this webp/nowebp class to serve different image formats in our m
 ```
 
 ## SVG
-As much as possible, it's always better to just serve SVGs, They resize on their own and they aren't heavy. If ever you have graphics for your website, serve them in SVGs instead
+As much as possible, it's always better to serve SVGs, They resize on their own and they aren't heavy like JPEGs, PNGs or... GIFs 🤮. If ever you have graphics for your website, serve them as SVGs instead.
 
 ## `<picture>` element
 You can also serve your images in html inside a [Mozilla picture element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture).
