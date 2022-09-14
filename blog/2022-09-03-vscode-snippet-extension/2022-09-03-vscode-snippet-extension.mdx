@@ -1,11 +1,11 @@
 ---
-slug: how-to-create-a-vscode-snippet-extension
-title: "How to Create a vscode Snippet Extension"
-description: Learn how to create a vscode snippet extension
+slug: how-to-create-a-VSCode-snippet-extension
+title: "How to Create a VSCode Snippet Extension"
+description: Learn how to create a VSCode snippet extension
 authors: mistermunchkin
 categories: VSCode
-tags: [vscode, extension, snippet, how-to]
-keywords: [vscode, snippet, extension, how-to, marketplace]
+tags: [VSCode, extension, snippet, how-to]
+keywords: [VSCode, snippet, extension, how-to, marketplace]
 ---
 
 I will go through the steps on how to create your own VSCode Snippet Extension.
@@ -84,7 +84,7 @@ In snippets/snippets.code-snippets, you can add your snippet objects. In a snipp
 }
 ```
 
-The name of the snippet ***Markdown Link Snippet*** is important if you want to reference your snippet somewhere in vscode, like **keybindings.json** so you can register keybindings to trigger your snippets. To learn how to do this, you can fast forward to [Selected Text Keybinding](#selected-text-keybinding)
+The name of the snippet ***Markdown Link Snippet*** is important if you want to reference your snippet somewhere in VSCode, like **keybindings.json** so you can register keybindings to trigger your snippets. To learn how to do this, you can fast forward to [Selected Text Keybinding](#selected-text-keybinding)
 
 ### Multi-Line Snippet
 
@@ -162,10 +162,10 @@ This is the same format as options, except we use a colon symbol instead of pipe
 ## Selected Text Keybinding
 I always had an easy time writing documentation on [Jira Confluence](https://www.atlassian.com/software/confluence) because of the different features we can use to make it easier to write markdown. Like how you can just <mark>highlight</mark> a text, and then trigger a hotkey like **cmd+b** to turn the selected text **bold**. 
 
-So I wanted to bring those features with me when I write docusaurus blogs in vscode. Here's how I did it.
+So I wanted to bring those features with me when I write Docusaurus blogs in VSCode. Here's how I did it.
 
 ### TM_SELECTED_TEXT
-**TM_SELECTED_TEXT** is a variable. It holds the currently selected text in your vscode editor, so we can use this in our snippet body to enclose the selected text with whatever we want to enclose it with.
+**TM_SELECTED_TEXT** is a variable. It holds the currently selected text in your VSCode editor, so we can use this in our snippet body to enclose the selected text with whatever we want to enclose it with.
 ```json title='TM_SELECTED_TEXT for bold'
 "Markdown Bold Selected Text": {
     "prefix": "!bold",
@@ -178,9 +178,9 @@ So actually just `${TM_SELECTED_TEXT}` Would suffice for what we want. But `${TM
 
 ### keybindings.json
 
-So we have the snippet ready, but we still need to add the **cmd+b** keybinding for this snippet. To do that we just need to update the *keybindings.json* file in vscode. 
+So we have the snippet ready, but we still need to add the **cmd+b** keybinding for this snippet. To do that we just need to update the *keybindings.json* file in VSCode. 
 
-:::note How to open keybindings.json in vscode
+:::note How to open keybindings.json in VSCode
 Just click on the settings cog on the bottom left, click Keyboard Shortcuts, and then click on the Open Keyboard Shortcuts(JSON) icon on the top write of the editor.
 :::
 
@@ -220,7 +220,7 @@ In your keybindings.json file, you can add the keybinding object
 </TabItem>
 </Tabs>
 
-There are tons of other commands you can use other than `editor.action.insertSnippet` but this is the one we need to use to have selected text keybinding for vscode.
+There are tons of other commands you can use other than `editor.action.insertSnippet` but this is the one we need to use to have selected text keybinding for VSCode.
 
 You can also change the `key` property value to whatever you want to change it to. Like **cmd+option+shift+1+2+3+up+down+left+right+side+to+side+bomb+b**...
 
@@ -228,10 +228,7 @@ You can also change the `key` property value to whatever you want to change it t
 
 Congratulations! You create your snippet extension and now you can share it with everyone! 
 
-This [visualstudio documentation](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) does a great write-up on a step-by-step guide on how to publish extensions and all the things you would want to do to your extension like versioning, depecrating, and packaging.
+This [Visual Studio documentation](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) has a great write-up on a step-by-step guide on how to publish extensions and all the things you would want to do to your extension like versioning, deprecating, and packaging.
 
 ## Closing Thoughts
-
-This blog really just hits the tip of the iceberg with what you can do with vscode extensions, but hopefully, you found it informative and helpful. 
-
-If you really liked it, consider [buying me a ☕️](https://www.paypal.com/donate/?hosted_button_id=B9HDECYJ4CEF8). Thanks! 
+This blog just hits the tip of the iceberg with what you can do with VSCode extensions, but hopefully, you found it informative and helpful. If you liked it, consider [buying me a ☕️](https://www.paypal.com/donate/?hosted_button_id=B9HDECYJ4CEF8). Thanks! 
