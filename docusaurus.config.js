@@ -34,7 +34,7 @@ const config = {
       ({
         docs: false,
         blog: {
-          routeBasePath: '/',
+          routeBasePath: 'blogs/',
           showReadingTime: true
         },
         theme: {
