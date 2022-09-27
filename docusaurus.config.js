@@ -33,15 +33,23 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: false,
-        blog: {
-          routeBasePath: 'blogs/',
-          showReadingTime: true
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
+  ],
+  plugins: [
+    [
+      "./plugins/blog-plugin.js",
+      {
+        id: "blog",
+        routeBasePath: "blog",
+        path: "./blog",
+        showReadingTime: true
+      }
+    ]
   ],
   scripts: [
     {
