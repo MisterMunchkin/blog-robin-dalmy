@@ -1,14 +1,15 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
+require("dotenv").config();
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Robin Dalmy',
+  title: process.env.SITE_TITLE,
   tagline: 'Writing tutorials I wish existed.',
-  url: 'https://blog.robindalmy.com',
+  url: process.env.SITE_URL,
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -16,8 +17,13 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'mistermunchkin', // Usually your GitHub org/user name.
-  projectName: 'blog-robin-dalmy', // Usually your repo name.
+  organizationName: process.env.ORG_NAME, // Usually your GitHub org/user name.
+  projectName: process.env.REPO_NAME, // Usually your repo name.
+  customFields: {
+    repoId: process.env.GISCUS_REPO_ID,
+    category: process.env.GISCUS_CAT,
+    categoryId: process.env.GISCUS_CAT_ID
+  },
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want

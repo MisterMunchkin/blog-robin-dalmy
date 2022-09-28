@@ -3,9 +3,13 @@ import Footer from '@theme-original/BlogPostItem/Footer';
 import { useBlogPost } from "@docusaurus/theme-common/internal";
 import Head from "@docusaurus/Head";
 import Giscus from '@giscus/react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useColorMode } from '@docusaurus/theme-common';
 
 export default function FooterWrapper(props) {
+  const { siteConfig } = useDocusaurusContext();
   const { metadata, isBlogPostPage } = useBlogPost();
+  const { colorMode } = useColorMode();
 
   if (!isBlogPostPage) {
     return <Footer {...props} />
@@ -20,16 +24,16 @@ export default function FooterWrapper(props) {
       <div className='margin-vert--xl'>
         <Giscus 
           id='comments'
-          repo="MisterMunchkin/blog-robin-dalmy"
-          repoId="R_kgDOH5NyHA"
-          category="Announcements"
-          categoryId="DIC_kwDOH5NyHM4CRolK"
+          repo={`${siteConfig.organizationName}/${siteConfig.projectName}`}
+          repoId={siteConfig.customFields.repoId}
+          category={siteConfig.customFields.category}
+          categoryId={siteConfig.customFields.categoryId}
           mapping="pathname"
           strict="0"
           reactionsEnabled="1"
           emitMetadata="0"
           inputPosition="top"
-          theme="preferred_color_scheme"
+          theme={colorMode}
           lang="en"
           loading="lazy" 
         /> 
