@@ -28,3 +28,19 @@
   --ifm-color-primary-lightest: #ffffff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.hero-color {
+  color: var(--ifm-color-primary-dark);
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: center;
+}
+
+.align-center {
+  text-align: center;
+}

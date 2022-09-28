@@ -8,11 +8,13 @@ tags: [web, html, css, pagespeed, images, how-to]
 authors: mistermunchkin
 ---
 
-I will go through some things you can do to your images to get a pagespeed score of 90-100 for both mobile and desktop. 
+I will go through some things you can do to your images to get a pagespeed score of 90-100 for both mobile and desktop, like [Preparing different image sizes and formats like webp](#prepare-different-image-sizes-and-formats), and [Media Queries for supporting the sizes and formats](#media-queries).
 
 :::note [imagekit.io](https://imagekit.io)
 If you have the 💰💰💰, you can use a cloud service like [imagekit.io](https://imagekit.io) and let them handle your image and video optimizations. This blog is mainly for people who don't have deep pockets.
 :::
+
+<!-- truncate -->
 
 ## Responsive Web Design
 Having a responsive web design means it should be optimized for all kinds of device screens! Be it a 5 inch mobile phone to a 34 inch ultrawide.
