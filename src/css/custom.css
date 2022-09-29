@@ -35,12 +35,23 @@
 
 .hero-section {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-text {
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: stretch;
-  align-items: center;
 }
 
 .align-center {
   text-align: center;
+}
+
+.hero-picture {
+  border-radius: 50%;
+  max-width: 150px;
 }

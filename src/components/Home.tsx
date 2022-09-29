@@ -14,14 +14,17 @@ const Home = ({ recentPosts }: HomeProps): JSX.Element => {
       <div className="hero">
           <div className="container">
             <div className="hero-section">
-
+              <div className="hero-text">
                 <h1 className="hero__title hero-color">
-                  Hi There 🖖🏽! I'm Robin.
+                  Hi there! 🖖🏽 I'm Robin.
                 </h1>
-                <p className="hero__subtitle align-center">
+                <p className="hero__subtitle">
                   I give unsolicited tech advice on the internet. <br />
-                  I blog on software development topics that I felt needed more context when I was stuck on it too.
+                  I blog on software development topics that I felt needed more context <br /> when I was stuck on it too.
                 </p>
+              </div>
+
+              <img title="profile picture" className="hero-picture" src="https://github.com/mistermunchkin.png" />
             </div>
           </div>
       </div>
