@@ -54,7 +54,7 @@ x1 would be the served to devices with a width below 1200px;
 }
 ```
 
-x2 would be served to devices with a width below 1600px and above 1200px
+x2 would be served to devices with a width in-between 1200px and 1600px
 ```css title='Version 2 Media Query'
 @media screen 
     and (min-device-width: 1200px)
@@ -69,7 +69,7 @@ x2 would be served to devices with a width below 1600px and above 1200px
     }
 }
 ```
-3x would be served to devices with a width below 1600px and above 1200px
+3x would be served to devices with a width above 1600px
 ```css title='Version 3 Media Query'
 @media screen
     and (min-device-width: 1600px){
@@ -102,7 +102,7 @@ For mobile, I just made use of one picture which had a resolution of 800px by 12
 ## monderizr-webp.js
 [modernizr](https://modernizr.com) have really great tools not just for webp, but for a host of different things for Javascript and CSS. 
 
-You can go to their modernizr download page, and build the minified js you need: [modernizr download page](https://modernizr.com/download?webp-setclasses&q=webp) and then add it to your website. Basically modernizr-webp detects your users devices if it can support webp. If it can, then it will give the html body a webp class. If it doesn't, it gets a no-webp class.
+You can go to their [modernizr download page](https://modernizr.com/download?webp-setclasses&q=webp), and build the minified js you need. Then add it to your website. Basically modernizr-webp detects your users devices if it can support webp. If it can, then it will give the html body a webp class. If it doesn't, it gets a no-webp class.
 
 We can then use this webp/nowebp class to serve different image formats in our media queries for different screen sizes in css.
 
