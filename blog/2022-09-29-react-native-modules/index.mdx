@@ -1,15 +1,103 @@
 ---
 slug: how-to-create-react-native-modules
-title: How to create React Native Modules
+title: React Native Modules for iOS Extended
 authors: mistermunchkin
-tags: [how-to, react, native, modules, ios, android, expo, swift, objective, c, java]
-description: Learn how to create react native modules that allow your native Swift/Objective C and Java code to communicate with your React Native code.
-keywords: [react, native, modules, ios, expo, swift, objective, c, java]
+tags: [how-to, react, native, modules, ios, swift, objective, c]
+description: Thing I learned while creating React Native Modules for iOS. I will touch on bridging, @escaping, what a bunch of Objective C things mean, and others.
+keywords: [react, native, modules, ios, swift, objective, c]
 ---
 
-🖖🏽 Hi! In this tutorial, we're going to learn how to set up react native modules for an Expo Bare Workflow project.
+export const XCodeHighlight = ({children}) => (
+    <span
+        style={{
+            fontFamily: 'Menlo,monospace',
+            color: 'var(--ifm-color-primary-darker)',
+            backgroundColor: 'var(--docusaurus-highlighted-code-line-bg)'
+        }}
+    >
+        {children}
+    </span>
+);
+
+
+🖖🏽 Hi! This blog is just some things I learned while creating React Native Modules like [bridging](#bridge-swift-to-objective-c-to-react-native), when to use <XCodeHighlight>@escaping</XCodeHighlight>, the point of <XCodeHighlight>DispatchQueue.main.async</XCodeHighlight>, and others. This isn't a "How to get started guide". 
+
+<!-- truncate -->
+
+If that's what you're looking for, here are some sources: 
+- For a fully **Objective C** implementation, you can follow [React Native's guide](https://reactnative.dev/docs/native-modules-ios). 
+- For making it work on **Swift Modules** with a bit of trickery, you can follow this [Medium Blog Post](https://gaitatzis.medium.com/react-native-native-modules-in-ios-swift-97eb9073f5a2)
 
 :::note Before we proceed
-This tutorial assumes that you already have working knowledge on Expo, React Native, and iOS or Android development
+This tutorial assumes that you already have working knowledgable in React Native, and iOS or Android development
 :::
+
+## Bridge Swift to Objective C to React Native
+
+### Bridging Headers
+
+The Bridging Header is automatically created once you add a Swift module to your project, This is where you can add Objective C headers that you need to expose to swift.
+
+The `#import <React/RCTBridgeModule.h>` is what is needed to bridge Swift.
+
+```objectivec title='Bridging-Header.h'
+//
+//  Use this file to import your target's public headers that you would
+like to expose to Swift.
+//
+#import <React/RCTBridgeModule.h>
+#import <Expo/Expo.h>
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTRootView.h>
+#import <React/RCTUtils.h>
+#import <React/RCTConvert.h>
+#import <React/RCTBundleURLProvider.h>
+#import <React/RCTEventEmitter.h>
+```
+
+### Bridging a Swift Module to Objective C
+
+You can now create a Swift Module that will be bridged to Objective C. To do this, you just need to add an  <XCodeHighlight>@objc</XCodeHighlight> decorator on the class and any methods you want to bridge.
+
+```swift title='SwiftModule.swift'
+// highlight-next-line
+@objc(OrigoSDKModule)
+class OrigoSDKModule: RCTEventEmitter {
+
+    //Event Emitter Methods
+    // highlight-next-line
+    @objc func event(message:String) {
+    }
+
+}
+```
+### Expose Swift modules into a React Native Objective C Bridge
+
+Doing this will allow us to expose our swift modules to React Native. This has to be through an Objective C bridge because React Native currently does not have support for Swift.
+To create a new Objective C .m file and name it something like Module.m or whatever, and it's important to import `<React/RCTBridgeModule.h>`
+
+```objectivec title='Module.m'
+#import <Foundation/Foundation.h>
+#import "React/RCTBridgeModule.h"
+
+@interface RCT_EXTERN_MODULE(CustomMethods, NSObject)
+  RCT_EXTERN_METHOD(simpleMethod)
+  RCT_EXTERN_METHOD(simpleMethodReturns:
+    (RCTResponseSenderBlock) callback
+  )
+  RCT_EXTERN_METHOD(simpleMethodWithParams:
+    (NSString *) param
+    callback: (RCTResponseSenderBlock)callback
+  )
+  RCT_EXTERN_METHOD(
+    resolvePromise: (RCTPromiseResolveBlock) resolve
+    rejecter: (RCTPromiseRejectBlock) reject
+  )
+  RCT_EXTERN_METHOD(rejectPromise:
+    (RCTPromiseResolveBlock) resolve
+    rejecter: (RCTPromiseRejectBlock) reject
+  )
+@end
+```
 

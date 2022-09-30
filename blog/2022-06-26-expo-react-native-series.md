@@ -97,13 +97,28 @@ If you are coming from a **Managed Workflow**, then it will eject iOS/Android wh
 ### Running on an Emulator
 if you take a look at your project folder, you will notice that an **ios/** or **android/** folder has been created. 
 
-You can open these folders in XCode or Android Studio, create your emulators or select them so when you run `expo run:ios/android` it will build for the emulator selected.
+You can open these folders in XCode or Android Studio, and then create your emulators or select them so when you run `expo run:ios/android` it will build for the emulator selected.
 
 ### Running on a Physical Device
-You can use the QR Code that will be generated when metro is running after expo run. if you're having problems with that, you can also set it to run on a physical device by connecting your device via USB and running
+You can use the QR Code that will be generated when metro is running after expo run. If you're having problems with that, you can also set it to run on a physical device by connecting your device via USB, and setting it up for development. Then run
+
+<Tabs>
+<TabItem value='iOS' label='iOS 🍎' default>
+
 ```bash 
 expo run:ios -d 'device uuid'
 ```
+
+</TabItem>
+<TabItem value='Android' label='Android 🤖' default>
+
+```bash 
+expo run:android -d 'device uuid'
+```
+
+</TabItem>
+</Tabs>
+
 Replace 'device uuid' with the device uuid that you want to deploy your app to. 
 
 To get your device uuid run this in the terminal.
@@ -111,6 +126,30 @@ To get your device uuid run this in the terminal.
 xcrun xctrace list devices
 ```
 [More info on getting device uuid](https://stackoverflow.com/questions/17237354/how-can-i-find-the-device-uuids-of-all-connected-devices-through-a-command-line)
+
+### Additional Considerations for Running on Physical Devices
+
+<Tabs>
+<TabItem value='ios' label='iOS 🍎' default>
+
+For **iOS** You also need to make sure it is part of the provisioning profile of your **Apple Team Account**. I also had a problem with [main.jsbundle being empty](https://stackoverflow.com/questions/57822215/main-jsbundle-file-showing-in-my-ios-project-but-still-throwing-no-bundle-url-p). So following the stack overflow issue, I added this to our package.json scripts
+
+```json title='package.json'
+ "build:ios-dev": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=true --platform='ios'"
+```
+
+This will allow us to populate main.jsbundle using this command `yarn run build:ios-dev`
+
+When the jsbundle has been successfully populated, you can then run this command to finally run for an iOS device `expo run:ios -d --configuration development`.
+
+
+</TabItem>
+<TabItem value='android' label='Android 🤖'>
+
+No issues with Android so far ✨ If you have any please let me know by commenting below!
+
+</TabItem>
+</Tabs>
 
 ### Installing Dev Client
 [Expo Development Installation](https://docs.expo.dev/development/installation/) documentation will guide you through how to install expo-dev-client onto your project. This will give you some quality of life improvements during development.
@@ -122,7 +161,7 @@ Despite what this [Expo Documentation](https://docs.expo.dev/bare/using-expo-cli
 TLDR; If your app isn't too reliant on custom native code, and you just something quick and easy for your shareholders to run, you can still use Expo Go.
 
 ## Running Expo Bare Workflow with EAS Build
-If you do need to build your projects without having to configure your machine for it locally, you can always use [EAS Build](https://docs.expo.dev/build/introduction/). What EAS Build allows you to do is to build your Bare Workflow on Expo Servers instead of your machine. This allows Windows machines to create builds for iOS.
+If you do need to build your projects without having to configure your machine for it locally, you can always use [EAS Build](https://docs.expo.dev/build/introduction/). What EAS Build allows you to do is to build your Bare Workflow on Expo Servers instead of on your machine. This allows Windows machines to create builds for iOS.
 
 The Expo Documentation does a good job of going through how to work with EAS Builds step by step, so I'll just list the docs I've used to make it work here.
 
