@@ -55,3 +55,91 @@
   border-radius: 50%;
   max-width: 150px;
 }
+
+/* .hero-image {
+  position: relative;
+  overflow: hidden;
+  background-image: url(../../static/img/hero-landscape.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+} */
+
+.gradient-anim-right {
+  display: inline-block;
+  background-position-x: 0px;
+  animation-duration: 3s;
+  animation-timing-function: cubic-bezier(0.48, 0.26, 0.49, 0.82);
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: bHafHd;
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: #a04298;
+  background-image: linear-gradient(90deg, #f50057 0%, #a04298 25%, #32517b 75%, #f50057 100%);
+  /* background-image: linear-gradient(90deg, rgb(162, 68, 255) 0%, rgb(52, 182, 255) 50%, rgb(162, 68, 255) 100%); */
+}
+
+@keyframes bHafHd {
+  from {
+      background-position-x: 0%;
+  }
+
+  to {
+      background-position-x: -200%;
+  }
+}
+
+/* Waves */
+.waves {
+  position:relative;
+  width: 100%;
+  height:15vh;
+  margin-bottom:-7px; /*Fix for safari gap*/
+  min-height:100px;
+  max-height:150px;
+}
+
+/* Animation */
+
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% { 
+    transform: translate3d(85px,0,0);
+  }
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height:40px;
+    min-height:40px;
+  }
+}
