@@ -3,6 +3,7 @@ import Layout from "@theme/Layout";
 import BlogPostItem from "@theme/BlogPostItem";
 import { Content } from "@theme/BlogPostPage";
 import { BlogPostProvider } from '@docusaurus/theme-common/internal';
+import Waves from "./Waves";
 
 interface HomeProps {
   readonly recentPosts: readonly { readonly content: Content }[];
@@ -11,23 +12,24 @@ interface HomeProps {
 const Home = ({ recentPosts }: HomeProps): JSX.Element => {
   return (
     <Layout>
-      <div className="hero">
-          <div className="container">
-            <div className="hero-section">
-              <div className="hero-text">
-                <h1 className="hero__title hero-color">
-                  Hi there! 🖖🏽 I'm Robin.
-                </h1>
-                <p className="hero__subtitle">
-                  I give unsolicited tech advice on the internet. <br />
-                  I blog on software development topics that I felt needed more context <br /> when I was stuck on it too.
-                </p>
-              </div>
-
-              <img title="profile picture" className="hero-picture" src="https://github.com/mistermunchkin.png" />
+      <div className="hero hero-image">
+        <div className="container">
+          <div className="hero-section">
+            <div className="hero-text">
+              <h1 className="hero__title">
+              Hi there 🖖🏽! I'm <span className="gradient-anim-right">Robin Dalmy</span> 
+              </h1>
+              <p className="hero__subtitle">
+                I give unsolicited tech advice on the internet. <br />
+                I blog on software development topics that I felt needed more context <br /> when I was stuck on it too.
+              </p>
             </div>
+
+            <img title="profile picture" className="hero-picture" src="https://github.com/mistermunchkin.png" />
           </div>
+        </div>
       </div>
+      
       <div className="container margin-top--xl">
         <div className="row">
           <div className="col col--9 col--offset-1">
