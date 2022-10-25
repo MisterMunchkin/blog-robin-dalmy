@@ -1,0 +1,145 @@
+---
+slug: how-to-add-custom-recaptcha-to-netlify-forms
+title: How to Add Custom Recaptcha to Netlify Forms
+authors: mistermunchkin
+tags: [netlify, html, forms, captcha, recaptcha, custom]
+description: We will go through how to add custom recaptcha to your Netlify forms, this way we can add custom validations and whatever we need during the recaptcha setup
+keywords: [netlify, html, forms, captcha, recaptcha]
+---
+
+Are you annoyed that the Netlify-provided reCAPTCHA allows users to submit the form with no notification or UI signals that they need to validate reCAPTCHA first? [Same](https://answers.netlify.com/t/know-if-recaptcha-v2-was-checked-or-not/41271/2).
+<!-- truncate -->
+
+I found the Netlify-provided reCAPTCHA problematic because the users wouldn't know if their submission was sent to the spam or not since it doesn't display any errors when the form is submitted with no valid reCAPTCHA. It just refreshes the site.
+
+This blog will guide you into how to disable your submit button, until a valid reCAPTCHA response has been provided, and will then send to Netlify forms.
+
+If you have no interest in learning step by step and wanna copy code, here's the [result](#result)
+
+## First Things First
+
+If you're using the [Netlify-provided reCAPTCHA 2](https://docs.netlify.com/forms/spam-filters/#netlify-provided-recaptcha-2)... don't. It was a good way to get my feet wet with how to set up the form, but it lacked customizability and a way to show the user that they need to validate reCAPTCHA first before submitting the form. 
+
+Instead, we need to use [Custom Recaptcha](https://docs.netlify.com/forms/spam-filters/#custom-recaptcha-2)
+
+## Integrate Custom reCAPTCHA to Netlify
+
+Integrating a custom reCAPTCHA to Netlify is straightforward, just follow the steps provided in the [Netlify blog](https://docs.netlify.com/forms/spam-filters/#custom-recaptcha-2), and when you're done come back ✨ here ✨
+
+## Implement Custom reCAPTCHA to your Website
+Integrating into Netlify was the easy part, now we gotta get to the not-so-easy part and implement our reCAPTCHA setup on our website.
+
+### Add the Google reCAPTCHA API script in our `<head/>`
+
+```markup title='reCAPTCHA script'
+<script src="https://www.google.com/recaptcha/api.js" defer></script>
+```
+
+:::tip defer the script
+`defer` the script since the site does not need it on page load. Also, typically your form is at the bottom of the page. more info on [javascript async defer](https://flaviocopes.com/javascript-async-defer/)
+:::
+
+### Add the reCAPTCHA container in your form
+The reCAPTCHA widget needs a container to live in with a `g-recaptcha` class name and your `data-sitekey`. This is going to be used by the reCAPTCHA script, more info [here](https://developers.google.com/recaptcha/docs/display).
+
+```markup title='reCAPTCHA container'
+<div 
+    class="g-recaptcha" 
+    data-sitekey="your-sitekey"
+>
+</div>
+```
+
+Place this div container where you would like your reCAPTCHA widget to display. I place mine on the bottom of the form right on top of the submit button.
+
+Now if you run this, you would have the same setup as what we had with the Netlify-provided reCAPTCHA. 
+
+Our goal now is to implement a UI design that will force the user into answering our reCAPTCHA widget first, before submitting the form.
+
+### Implement disable submit button until reCAPTCHA has been validated
+First, we can just set the submit button to disabled.
+
+```markup title='Disabled submit button'
+<button id="contact-us-submit-btn" type="submit" disabled>Submit</button>
+```
+
+Then in our reCAPTCHA widget div container, we add a `data-callback` attribute with the name of our js function as the value. So now it should look like this.
+
+```markup title='reCAPTCHA container'
+<div 
+    id="contact-us-recaptcha" 
+    class="g-recaptcha" 
+    data-sitekey="your-sitekey"
+    data-callback="recaptchaCallback"
+>
+```
+
+In your js file, create the `recaptchaCallback` function. This function should remove the disable attribute we added to the submit button.
+
+```javascript title='recaptchaCallback method'
+    function recaptchaCallback() {
+        const submitButton = document.getElementById("contact-us-submit-btn");
+        submitButton.removeAttribute("disabled");
+    }
+
+    // Define recaptchaCallback in the global scope.
+    // highlight-next-line
+    window.recaptchaCallback = recaptchaCallback;
+```
+:::note data-callback how it works
+data-callback method for reCAPTCHA will only get triggered when the reCAPTCHA widget returns a valid response. So the recaptchaCallback function only gets triggered once the user passes the reCAPTCHA test.
+:::
+
+Also, don't forget to define `recaptchaCallback` in the global scope so your reCAPTCHA div container can find it.
+
+## Result
+Your resulting HTML and JS code should look something like this.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value='HTML' label='HTML' default>
+
+```markup
+<form data-netlify="true" data-netlify-recaptcha="true" name="form" method="POST">
+    ...
+    <!-- Relevant code -->
+    <div 
+        id="contact-us-recaptcha" 
+        class="g-recaptcha" 
+        data-sitekey="your-sitekey"
+        data-callback="recaptchaCallback"
+    ></div>
+    <button id="contact-us-submit-btn" type="submit" disabled>Submit</button>
+</form>
+```
+
+</TabItem>
+
+<TabItem value="JS" label="JS">
+
+```javascript
+    ...
+    //Relevant code
+    function recaptchaCallback() {
+        const submitButton = document.getElementById("contact-us-submit-btn");
+        submitButton.removeAttribute("disabled");
+    }
+
+    window.recaptchaCallback = recaptchaCallback;
+```
+
+</TabItem>
+
+</Tabs>
+
+import ReactPlayer from 'react-player/lazy';
+
+### Demo
+<ReactPlayer playing controls url="/videos/2022-10-25-custom-recaptcha-netlify-forms/result.mp4" />
+
+## Thoughts
+Eyyy you've made it. Tell me what you think about this blog and if there are other topics you would like me to cover 🎉 down below 🎉
+
+ Thanks for reading and if you would be so kind as to [buy me a ☕️](https://www.paypal.com/donate/?hosted_button_id=B9HDECYJ4CEF8), that'd be great.
