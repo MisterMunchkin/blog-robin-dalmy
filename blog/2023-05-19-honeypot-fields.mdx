@@ -1,0 +1,45 @@
+---
+slug: honeypot-fields
+title: Add Honeypot Fields to your forms
+authors: mistermunchkin
+tags: [html, forms, security, bots]
+description: Honeypot traps are a way to deter bots and improve the quality of your form submissions on your web application
+keywords: [html, forms, security, bots]
+---
+
+A Honey Pot trap is a useful way to improve the quality of the form submissions that you receive on your web applications. 
+
+<!-- truncate -->
+
+The main premise of the trap is to create an invisible input that an actual user cannot see, but a bot attacking your site could see. if the invisible input is filled up, then the request came from a bot.
+
+In my opinion, this is a better security method than ReCaptcha. It does not hinder the flow of the user, and AI is so powerful now that the usual ReCaptcha tests probably do not work as well anymore. Also, it's a lot simpler and cleaner to implement.
+
+## Implementation
+All you need is a hidden input button
+```markup title='Hidden input using TailwindCSS'
+<div className="hidden">
+    <label htmlFor="honeyPotEmail">Email</label>
+    <input 
+        id="honeyPotEmail" 
+        type="email" 
+        autoComplete="off" 
+    />
+</div>
+```
+
+Then, during your form submission, you check if the input is filled up.
+```typescript title='Honeypot logic during form submit'
+const onSubmit: SubmitHandler<OrderFormInterface> = async (data) => { 
+    setSubmitting(true);
+    
+    try {
+      if (data.honeyPotEmail) {
+        const stringData = JSON.stringify(data);
+        throw new Error(`Caught a bot. ${stringData}`);
+      }
+    ...
+}
+```
+
+That’s it! You can also just continue with the submit and deal with the honeyPot logic on the backend.
