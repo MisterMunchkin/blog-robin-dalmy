@@ -38,7 +38,7 @@
 .raw { background: var(--chart-raw); }
 .compressed { background: var(--chart-compressed); background-image: repeating-linear-gradient(135deg, transparent 0, transparent 6px, rgba(255,255,255,0.22) 6px, rgba(255,255,255,0.22) 8px); }
 .axis { position: relative; height: 1.2em; color: var(--chart-muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; line-height: 1.2; }
-.axis span { position: absolute; top: 0; transform: translateX(-50%); }
+.axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
 .axis span:first-child { transform: none; }
 .axis span:last-child { transform: translateX(-100%); }
 .timings { margin-top: 1.25rem; padding-top: 0.2rem; border-top: 1px solid var(--chart-border); }
