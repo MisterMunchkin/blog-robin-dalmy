@@ -1,0 +1,66 @@
+.figure {
+  --chart-raw: #667483;
+  --chart-compressed: #005183;
+  --chart-background: #f6f9fb;
+  --chart-border: #d3dde5;
+  --chart-grid: #dde6ec;
+  --chart-muted: #4b5d6b;
+  margin: 2rem 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--chart-border);
+  border-radius: 12px;
+  background: var(--chart-background);
+  color: var(--ifm-font-color-base);
+  overflow-wrap: anywhere;
+}
+
+:global([data-theme='dark']) .figure {
+  --chart-raw: #aebbc9;
+  --chart-compressed: #ff8ea7;
+  --chart-background: #20252d;
+  --chart-border: #45515e;
+  --chart-grid: #36414e;
+  --chart-muted: #c0cbd5;
+}
+
+.figure p { margin: 0; }
+.eyebrow { color: var(--chart-muted); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em; }
+.title { margin-top: 0.4rem !important; font-size: 1.25rem; font-weight: 750; line-height: 1.3; }
+.highlight { margin-top: 0.6rem !important; color: var(--ifm-color-primary); font-size: 0.95rem; font-weight: 700; }
+.metric { margin: 1.25rem 0 0.75rem !important; color: var(--chart-muted); font-size: 0.85rem; font-weight: 650; }
+.rows { padding: 0 !important; margin: 0 !important; list-style: none; }
+.row { margin: 0 0 0.85rem !important; padding: 0; }
+.rowLabel { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; font-size: 0.9rem; }
+.rowLabel strong { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 700; }
+.detail { margin: 0.1rem 0 0.3rem !important; font-size: 0.8rem; color: var(--chart-muted); line-height: 1.45; }
+.track { height: 19px; margin-top: 0.3rem; background: repeating-linear-gradient(to right, var(--chart-grid) 0, var(--chart-grid) 1px, transparent 1px, transparent 25%); border-right: 1px solid var(--chart-grid); }
+.raw, .compressed { height: 100%; border-radius: 0 3px 3px 0; }
+.raw { background: var(--chart-raw); }
+.compressed { background: var(--chart-compressed); background-image: repeating-linear-gradient(135deg, transparent 0, transparent 6px, rgba(255,255,255,0.22) 6px, rgba(255,255,255,0.22) 8px); }
+.axis { position: relative; height: 1.2em; color: var(--chart-muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.axis span:first-child { transform: none; }
+.axis span:last-child { transform: translateX(-100%); }
+.timings { margin-top: 1.25rem; padding-top: 0.2rem; border-top: 1px solid var(--chart-border); }
+.timingGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.timingTitle { min-height: 2.6em; margin-bottom: 0.65rem !important; font-size: 0.85rem; font-weight: 650; line-height: 1.3; }
+.compactPlot .rowLabel { display: block; font-size: 0.8rem; }
+.compactPlot .rowLabel strong { display: block; }
+.compactPlot .track { height: 14px; background-size: 200% 100%; }
+.compactPlot .row { margin-bottom: 0.65rem !important; }
+.note { margin-top: 1.25rem !important; color: var(--chart-muted); font-size: 0.85rem; line-height: 1.55; }
+.warning { margin-top: 0.85rem !important; padding: 0.7rem 0.85rem; border-left: 3px solid var(--ifm-color-primary); background: var(--ifm-background-color); font-size: 0.9rem; font-weight: 650; line-height: 1.45; }
+
+@media (max-width: 600px) {
+  .timingGrid { grid-template-columns: 1fr; gap: 1.1rem; }
+  .timingTitle { min-height: 0; }
+  .compactPlot .rowLabel { display: flex; font-size: 0.9rem; }
+  .compactPlot .rowLabel strong { display: inline; }
+}
+
+@media (forced-colors: active) {
+  .figure { border-color: CanvasText; }
+  .track { border: 1px solid CanvasText; }
+  .raw, .compressed { background: CanvasText; forced-color-adjust: none; }
+  .compressed { border-top: 4px solid Canvas; border-bottom: 4px solid Canvas; }
+}
