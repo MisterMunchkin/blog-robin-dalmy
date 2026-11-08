@@ -8,6 +8,8 @@ description: What my lossless model compression experiments taught me about disk
 keywords: [lossless compression, local models, MLX, Qwen3, BF16, benchmarking]
 ---
 
+import CompressionBenchmarks from '@site/src/components/CompressionBenchmarks';
+
 I wanted to find out whether I could run a higher-precision local model with less memory, while preserving every weight exactly. The first result looked promising: about 25% smaller weight storage.
 
 Then I asked why the RAM usage was almost unchanged.
@@ -44,6 +46,8 @@ The failure happened before compression was involved. Keeping that control separ
 
 The Qwen3-8B streaming test reduced weight storage from 16.38 GB to 12.29 GB, about 25%. All 8.19 billion weight values survived compression bit-for-bit. Raw and compressed execution also produced identical logits and output in the short inference test.
 
+<CompressionBenchmarks kind="storage" />
+
 But both loaders were reading small chunks from disk. The raw baseline already avoided keeping all the weights in memory, so compression did not reduce measured working memory. The decoder added a little overhead instead.
 
 I asked why we were not decoding on demand. We already were. The missing distinction was where the compressed weights lived between calculations.
@@ -55,6 +59,8 @@ To test the memory-saving idea I actually cared about, the comparison needed to 
 On the 1.7B test, peak charged memory fell from about 3.42 GiB to 2.62 GiB, a reduction of 23.3%. The full weight payload was resident at each observed inference checkpoint, and the logits matched.
 
 The cost showed up in execution time. Prompt processing took about 43% longer, and the two measured decode steps took about 50% longer. Neither inference run recorded swap-in or swap-out.
+
+<CompressionBenchmarks kind="resident" />
 
 That gave me a useful result at a small scale: the approach could reduce the measured memory footprint while preserving the tested output. It also made the speed penalty concrete. Two decode steps were enough for a bounded check, but far too few to describe sustained generation performance.
 
@@ -73,6 +79,8 @@ I then requested another comparison, compressed first and raw second, with the s
 - Prompt processing took 3.48 seconds compressed versus 2.67 seconds raw, about 30% longer.
 
 - The next-token step took 3.21 seconds compressed versus 2.21 seconds raw, about 45% longer.
+
+<CompressionBenchmarks kind="larger" />
 
 Both runs involved paging. Compressed started with 9.69 GiB available, while raw started with 17.70 GiB after cleanup. These are measurements from a completed comparison, with different starting conditions. They do not establish a controlled reduction in system memory pressure or a fully resident 8B result.
 
